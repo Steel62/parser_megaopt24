@@ -16,10 +16,16 @@ function parseLinkCatalog(HTMLString) {
 function parseCards(HTMLString, domain) {
     const result = [];
     const ch = cheerio.load(HTMLString);
+    let category = ch('.b-title-catalog').text().trim();
+    if (category.endsWith('оптом')){
+        category = category.slice(0, category.indexOf('оптом', 0));
+        category = category.trim();
+    }
     ch('.b-goods').each((index, elem) => {
         const obj = {};
         obj.name = ch(elem).find('.b-goods__name > a').text().trim();
         obj.price = ch(elem).find('.b-goods__price-1').text().trim();
+        obj.category = category;
         obj.link = domain + ch(elem).find('.b-goods__name > a').attr('href');
         obj.image = ch(elem).find('.b-img-height').attr('src');
 

@@ -2,6 +2,9 @@
     const fetch = require('./fetch');
     const save = require('./excel');
     const parse = require('./parse');
+
+
+
     const state = {
         catalogLinks: [],
         parcedObjects: [],
@@ -10,6 +13,7 @@
 
     const domain = 'https://megaopt24.ru';
     const outputFileName = 'result.xlsx';
+
 
 
     let html = await fetch.getHTML(domain);

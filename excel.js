@@ -13,12 +13,11 @@ function saveToExcel(dataArray, fileName) {
         }
     });
 
-    // for (let counter = 0; counter < dataArray.length; counter++){
-    //     workSheet.cell(counter + 1, 1).string(dataArray[counter].name).style(style);
-    //     workSheet.cell(counter + 1, 2).string(dataArray[counter].image).style(style);
-    //     workSheet.cell(counter + 1, 3).string(dataArray[counter].price).style(style);
-    //     workSheet.cell(counter + 1, 4).string(dataArray[counter].link).style(style);
-    // }
+    const columnWidths = [85, 10, 30, 50, 50];
+    for (let column = 1; column <= columnWidths.length; column++){
+        workSheet.column(column).setWidth(columnWidths[column-1]);
+    }
+
 
     let row = 1;
     dataArray.forEach(item =>{
@@ -30,15 +29,16 @@ function saveToExcel(dataArray, fileName) {
         row++;
     });
 
-    try {
-        workBook.write(fileName);
-        console.log(`Данные успешно сохранены в ${fileName}`);
-        return true;
-    }
-    catch (e) {
-        console.log(`Не удалось сохранить таблицу excel: ${e.message}`);
-        return false;
-    }
+        workBook.write(fileName, (err) => {
+            if(err){
+                console.log(`Не удалось сохранить таблицу excel:`);
+                console.log(err);
+            } else {
+                console.log(`Данные успешно сохранены в ${fileName}`);
+            }
+        });
 }
+
+
 
 module.exports.saveToExcel = saveToExcel;

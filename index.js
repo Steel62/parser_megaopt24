@@ -24,12 +24,17 @@
         html = await fetch.getHTML(catalogLink);
         const pageLinks = parse.getPageLinks(html, domain);
         let resultObjects;
-
-        pageLinks.forEach(async pageLink => {
-            html = await fetch.getHTML(pageLink);
+        if(pageLinks.length <= 1){
             resultObjects = parse.parseCards(html, domain);
             resultObjects.length && (state.parcedObjects.push(...resultObjects));
-        });
+        } else {
+            pageLinks.forEach(async pageLink => {
+                html = await fetch.getHTML(pageLink);
+                resultObjects = parse.parseCards(html, domain);
+                resultObjects.length && (state.parcedObjects.push(...resultObjects));
+            });
+        }
+
     }
     console.log(`Парсинг товаров завершен. Получено ${state.parcedObjects.length} позиций. Сохранение...`);
 

@@ -1,12 +1,12 @@
 {
   "name": "scraping",
   "version": "1.0.0",
-  "description": "",
+  "description": "Парсит все товары с сайта https://megaopt24.ru",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
-  "author": "",
+  "author": "Vitaly Kuvshinov",
   "license": "ISC",
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",

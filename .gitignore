@@ -1,3 +1,4 @@
 /.idea
 /node_modules
 result.xlsx
+package-lock.json
